@@ -1,3 +1,4 @@
+
 async function sprintChallenge5() { // Note the async keyword so you can use `await` inside sprintChallenge5
   // 👇 WORK ONLY BELOW THIS LINE 👇
   // 👇 WORK ONLY BELOW THIS LINE 👇
@@ -11,6 +12,31 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
 
   let mentors = [] // fix this
   let learners = [] // fix this
+
+
+  async function fetchData() {
+    try {
+      // Start both requests
+      let mentorsPromise = axios.get('http://localhost:3003/api/learners');
+      let learnersPromise = axios.get('http://localhost:3003/api/mentors');
+
+      // Wait for both to complete
+      let [mentorsResponse, learnersResponse] 
+      = await Promise.all([mentorsPromise, learnersPromise]);
+
+      // Extract the data
+      mentors = mentorsResponse.data;
+      learners = learnersResponse.data;
+
+      console.log(mentors, learners);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  }
+
+  fetchData();
+
+
 
   // 👆 ==================== TASK 1 END ====================== 👆
 
@@ -28,6 +54,37 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
   //     "Grace Hopper"
   //   ]`
   // }
+
+  mentors = [
+    { id: 1, name: "Bill Gates" },
+    { id: 2, name: "Grace Hopper" },
+    // ...
+  ];
+
+  learners = [
+    { id: 6, fullName: "Bob Johnson", 
+       email: "bob.johnson@example.com", 
+       mentors: [1, 2] },
+    // ...
+  ];
+
+  // Create a lookup object for the mentors
+  let mentorLookup = {};
+    mentors.forEach(mentor => {
+    mentorLookup[mentor.id] = mentor.name;
+  });
+
+  // Update the learners array
+  learners = learners.map(learner => {
+
+    // Replace each mentor ID with the mentor's name
+    let mentorNames = learner.mentors.map(id => mentorLookup[id]);
+
+    // Return a new object with the updated mentors array
+    return { ...learner, mentors: mentorNames };
+  });
+
+  console.log(learners);
 
   // 👆 ==================== TASK 2 END ====================== 👆
 
@@ -47,11 +104,53 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
     // ❗ Fill each <li> with a mentor name, and append it to the <ul> mentorList.
     // ❗ Inspect the mock site closely to understand what the initial texts and classes look like!
 
-    const card = document.createElement('div')
-    const heading = document.createElement('h3')
-    const email = document.createElement('div')
-    const mentorsHeading = document.createElement('h4')
-    const mentorsList = document.createElement('ul')
+    //const card = document.createElement('div')
+    //const heading = document.createElement('h3')
+    //const email = document.createElement('div')
+    //const mentorsHeading = document.createElement('h4')
+    //const mentorsList = document.createElement('ul')
+
+      // Assuming learner object is something like this
+// let learner = { name: 'John Doe', email: 'john.doe@example.com', mentors: ['Mentor1', 'Mentor2'] };
+      
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      const heading = document.createElement('h3');
+      heading.classList.add('card-heading');
+
+      const email = document.createElement('div');
+      email.classList.add('card-email');
+
+      const mentorsHeading = document.createElement('h4');
+      mentorsHeading.classList.add('mentors-heading');
+
+      const mentorsList = document.createElement('ul');
+      mentorsList.classList.add('mentors-list');
+
+
+      heading.textContent = learner.name;
+      email.textContent = learner.email;
+      mentorsHeading.textContent = 'Mentors';
+
+          
+      // Loop over the mentors and create an <li> element for each
+      learner.mentors.forEach(mentor => {
+        const mentorItem = document.createElement('li');
+        mentorItem.textContent = mentor;
+        mentorsList.appendChild(mentorItem);
+      });
+
+      card.appendChild(heading);
+      card.appendChild(email);
+      card.appendChild(mentorsHeading);
+      card.appendChild(mentorsList);
+
+      // Assuming cardsContainer is a defined element
+      cardsContainer.appendChild(card);
+      
+
+
 
     // 👆 ==================== TASK 3 END ====================== 👆
 

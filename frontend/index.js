@@ -58,6 +58,83 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
   mentors = [
     { id: 1, name: "Bill Gates" },
     { id: 2, name: "Grace Hopper" },
+    {
+      
+      id: 12, name: "Ada Lovelace"
+  },
+  {
+      
+    id: 78, name: "Bill Gates"
+  },
+  {
+      
+    id: 63, name: "Brendan Eich"
+  },
+  {
+     
+    id: 42, name: "Brian Kernighan"
+  },
+  {
+      
+    id: 94, name: "Dan Ingalls"
+  },
+  {
+      
+    id: 17, name: "Grace Hopper"
+  },
+  {
+      
+    id: 7, name : "Guido van Rossum"
+  },
+  {
+     
+    id: 83, name: "James Gosling"
+  },
+  {
+      
+    id: 51, name: "Linus Torvalds"
+  },
+  {
+      
+    id: 67, name: "Margaret Hamilton"
+  },
+  {
+      
+    id: 60, name: "Mark Zuckerberg"
+  },
+  {
+     
+    id: 25, name: "Martin Fowler"
+  },
+  {
+      
+    id: 88,  name: "Mary Shaw"
+  },
+  {
+      
+    id: 71, name: "Mitchell Hashimoto"
+  },
+  {
+      
+    id: 95, name: "Rasmus Lerdorf"
+  },
+  {
+      
+    id: 14, name: "Robert Martin"
+  },
+  {
+      
+    id: 32, name: "Sergey Brin"
+  },
+  {
+      
+    id: 49, name: "Sheryl Sandberg"
+  },
+  {
+      
+    id: 58, name: "Yukihiro Matsumoto"
+  }
+  
     // ...
   ];
 
@@ -65,6 +142,99 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
     { id: 6, fullName: "Bob Johnson", 
        email: "bob.johnson@example.com", 
        mentors: [1, 2] },
+
+    {
+        id: 52,
+        fullName: "Samantha Richards",
+        email: "samantha.richards@example.com",
+        mentors: [12,83 ]
+    },
+    {
+        id: 84,
+        fullName: "Harry Potter",
+        email: "harry.potter@example.com",
+        mentors: [71,95]
+    },
+    {
+        id: 18,
+        fullName: "Gina Smith",
+        email: "gina.smith@example.com",
+        mentors: [32]
+    },
+    {
+        id: 77,
+        fullName: "Max Power",
+        email: "max.power@example.com",
+        mentors: [51,94]
+    },
+    {
+        id: 68,
+        fullName: "Daisy Duke",
+        email: "daisy.duke@example.com",
+        mentors: [
+            58,83,49]
+    },
+    {
+        id: 1,
+        fullName: "Jack Sparrow",
+        email: "jack.sparrow@example.com",
+        mentors: [12,67]
+    },
+    {
+        id: 48,
+        fullName: "Homer Simpson",
+        email: "homer.simpson@example.com",
+        mentors: [42]
+    },
+    {
+        id: 97,
+        fullName: "Luna Lovegood",
+        email: "luna.lovegood@example.com",
+        mentors: [12,17,25,58]
+    },
+    {
+        id: 3,
+        fullName: "Joe Bloggs",
+        email: "joe.bloggs@example.com",
+        mentors: [83]
+    },
+    {
+        id: 35,
+        fullName: "Bilbo Baggins",
+        email: "bilbo.baggins@example.com",
+        mentors: [51,60,95]
+    },
+    {
+        id: 29,
+        fullName: "Marge Simpson",
+        email: "marge.simpson@example.com",
+        mentors: [78,14]
+    },
+    {
+        id: 8,
+        fullName: "Peter Parker",
+        email: "peter.parker@example.com",
+        mentors: [51,83,88]
+    },
+    {
+        id: 57,
+        fullName: "Betty Boop",
+        email: "betty.boop@example.com",
+        mentors: [17,71,42]
+    },
+    {
+        id: 22,
+        fullName: "Mickey Mouse",
+        email: "mickey.mouse@example.com",
+        mentors: [83]
+    },
+    {
+        id: 91,
+        fullName: "Daffy Duck",
+        email: "daffy.duck@example.com",
+        mentors: [63,71]
+    }
+
     // ...
   ];
 
@@ -104,28 +274,29 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
     // ❗ Fill each <li> with a mentor name, and append it to the <ul> mentorList.
     // ❗ Inspect the mock site closely to understand what the initial texts and classes look like!
 
-    //const card = document.createElement('div')
-    //const heading = document.createElement('h3')
-    //const email = document.createElement('div')
-    //const mentorsHeading = document.createElement('h4')
-    //const mentorsList = document.createElement('ul')
+    const card = document.createElement('div')
+    const heading = document.createElement('h3')
+    const email = document.createElement('div')
+    const mentorsHeading = document.createElement('h4')
+    const mentorsList = document.createElement('ul')
 
       // Assuming learner object is something like this
 // let learner = { name: 'John Doe', email: 'john.doe@example.com', mentors: ['Mentor1', 'Mentor2'] };
+
       
-      const card = document.createElement('div');
+      
       card.classList.add('card');
 
-      const heading = document.createElement('h3');
+      
       heading.classList.add('card-heading');
 
-      const email = document.createElement('div');
+      
       email.classList.add('card-email');
 
-      const mentorsHeading = document.createElement('h4');
+      
       mentorsHeading.classList.add('mentors-heading');
 
-      const mentorsList = document.createElement('ul');
+      
       mentorsList.classList.add('mentors-list');
 
 

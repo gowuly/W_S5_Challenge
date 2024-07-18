@@ -119,6 +119,8 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
 
    //add classlists to elements created
   card.classList.add('card');
+  
+  
 
   //heading.classList.add('card-heading');
 
@@ -136,7 +138,7 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
 
   heading.textContent = learner.fullName;
   email.textContent = learner.email;
-  mentorsHeading.textContent = 'mentors';
+  mentorsHeading.textContent = 'Mentors';
 
  // Loop over the mentors and create an <li> element for each
   learner.mentors.forEach(mentorId => {
@@ -159,6 +161,7 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
   card.appendChild(email);
   card.appendChild(mentorsHeading);
   card.appendChild(mentorsList);
+  
 
   // append card to cardsContainer
   cardsContainer.appendChild(card);

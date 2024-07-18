@@ -1,4 +1,5 @@
 
+
 async function sprintChallenge5() { // Note the async keyword so you can use `await` inside sprintChallenge5
   // 👇 WORK ONLY BELOW THIS LINE 👇
   // 👇 WORK ONLY BELOW THIS LINE 👇
@@ -10,34 +11,37 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
   // ❗ Use the variables `mentors` and `learners` to store the data.
   // ❗ Use the await keyword when using axios.
 
-  let mentors = [] // fix this
-  let learners = [] // fix this
+      let mentors = [] // fix this
+      let learners = [] // fix this
 
+      //fetch data from an endpoint
+      const fetchData = async (endpoint) => {
+      try {
+        const response = await axios.get(endpoint);
+        return response.data;
 
-  async function fetchData() {
-    try {
-      // Start both requests
-      let mentorsPromise = axios.get('http://localhost:3003/api/learners');
-      let learnersPromise = axios.get('http://localhost:3003/api/mentors');
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+      }
+    };
 
-      // Wait for both to complete
-      let [mentorsResponse, learnersResponse] 
-      = await Promise.all([mentorsPromise, learnersPromise]);
+ 
 
-      // Extract the data
-      mentors = mentorsResponse.data;
-      learners = learnersResponse.data;
+      // Use Promise.all to handle both requests concurrently
+      await Promise.all([fetchData('http://localhost:3003/api/learners'), 
+        fetchData('http://localhost:3003/api/mentors')])
+      .then(([learnersData, mentorsData]) => {
+        // update the value of learners and mentors
+        learners = learnersData;
+        mentors = mentorsData;
 
-      console.log(mentors, learners);
-    } catch (error) {
-      console.error("Error fetching data", error);
-    }
-  }
-
-  fetchData();
-
-
-
+        console.log(learners); //expected learners array logged to the console
+        console.log(mentors);  //expected mentors array logged to the console
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   // 👆 ==================== TASK 1 END ====================== 👆
 
   // 👇 ==================== TASK 2 START ==================== 👇
@@ -55,212 +59,44 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
   //   ]`
   // }
 
-  mentors = [
-    { id: 1, name: "Bill Gates" },
-    { id: 2, name: "Grace Hopper" },
-    {
-      
-      id: 12, name: "Ada Lovelace"
-  },
-  {
-      
-    id: 78, name: "Bill Gates"
-  },
-  {
-      
-    id: 63, name: "Brendan Eich"
-  },
-  {
-     
-    id: 42, name: "Brian Kernighan"
-  },
-  {
-      
-    id: 94, name: "Dan Ingalls"
-  },
-  {
-      
-    id: 17, name: "Grace Hopper"
-  },
-  {
-      
-    id: 7, name : "Guido van Rossum"
-  },
-  {
-     
-    id: 83, name: "James Gosling"
-  },
-  {
-      
-    id: 51, name: "Linus Torvalds"
-  },
-  {
-      
-    id: 67, name: "Margaret Hamilton"
-  },
-  {
-      
-    id: 60, name: "Mark Zuckerberg"
-  },
-  {
-     
-    id: 25, name: "Martin Fowler"
-  },
-  {
-      
-    id: 88,  name: "Mary Shaw"
-  },
-  {
-      
-    id: 71, name: "Mitchell Hashimoto"
-  },
-  {
-      
-    id: 95, name: "Rasmus Lerdorf"
-  },
-  {
-      
-    id: 14, name: "Robert Martin"
-  },
-  {
-      
-    id: 32, name: "Sergey Brin"
-  },
-  {
-      
-    id: 49, name: "Sheryl Sandberg"
-  },
-  {
-      
-    id: 58, name: "Yukihiro Matsumoto"
-  }
-  
-    // ...
-  ];
+    // combine data from two endpoints
+    const combineData = (learners, mentors) => {
+      console.log(mentors)
 
-  learners = [
-    { id: 6, fullName: "Bob Johnson", 
-       email: "bob.johnson@example.com", 
-       mentors: [1, 2] },
-
-    {
-        id: 52,
-        fullName: "Samantha Richards",
-        email: "samantha.richards@example.com",
-        mentors: [12,83 ]
-    },
-    {
-        id: 84,
-        fullName: "Harry Potter",
-        email: "harry.potter@example.com",
-        mentors: [71,95]
-    },
-    {
-        id: 18,
-        fullName: "Gina Smith",
-        email: "gina.smith@example.com",
-        mentors: [32]
-    },
-    {
-        id: 77,
-        fullName: "Max Power",
-        email: "max.power@example.com",
-        mentors: [51,94]
-    },
-    {
-        id: 68,
-        fullName: "Daisy Duke",
-        email: "daisy.duke@example.com",
-        mentors: [
-            58,83,49]
-    },
-    {
-        id: 1,
-        fullName: "Jack Sparrow",
-        email: "jack.sparrow@example.com",
-        mentors: [12,67]
-    },
-    {
-        id: 48,
-        fullName: "Homer Simpson",
-        email: "homer.simpson@example.com",
-        mentors: [42]
-    },
-    {
-        id: 97,
-        fullName: "Luna Lovegood",
-        email: "luna.lovegood@example.com",
-        mentors: [12,17,25,58]
-    },
-    {
-        id: 3,
-        fullName: "Joe Bloggs",
-        email: "joe.bloggs@example.com",
-        mentors: [83]
-    },
-    {
-        id: 35,
-        fullName: "Bilbo Baggins",
-        email: "bilbo.baggins@example.com",
-        mentors: [51,60,95]
-    },
-    {
-        id: 29,
-        fullName: "Marge Simpson",
-        email: "marge.simpson@example.com",
-        mentors: [78,14]
-    },
-    {
-        id: 8,
-        fullName: "Peter Parker",
-        email: "peter.parker@example.com",
-        mentors: [51,83,88]
-    },
-    {
-        id: 57,
-        fullName: "Betty Boop",
-        email: "betty.boop@example.com",
-        mentors: [17,71,42]
-    },
-    {
-        id: 22,
-        fullName: "Mickey Mouse",
-        email: "mickey.mouse@example.com",
-        mentors: [83]
-    },
-    {
-        id: 91,
-        fullName: "Daffy Duck",
-        email: "daffy.duck@example.com",
-        mentors: [63,71]
+      return learners.map(learner => {
+        if (!learner.mentors) {
+          return learner; 
+        }
+         //map over mentors a property of lerners object and changing the mentors ids array to mentor names array
+        let mentorsNames = learner.mentors
+          .map(mentorId => {
+            const mentor = mentors.find(item => item.id === mentorId);
+            return mentor ? `${mentor.firstName} ${mentor.lastName}` : null;
+          })
+          .filter(mentor => mentor); // Filter out any null values
+          mentors = mentorsNames;
+          console.log(mentors) // this log out empty array...because mentors is a local variable in this function
+          
+          return {
+          fullName: learner.fullName,
+          id: learner.id,
+          email: learner.email,
+          mentors: mentorsNames
+        };
+      });
     }
+  let combinedData = combineData(learners, mentors);
+  console.log(combinedData)
 
-    // ...
-  ];
 
-  // Create a lookup object for the mentors
-  let mentorLookup = {};
-    mentors.forEach(mentor => {
-    mentorLookup[mentor.id] = mentor.name;
-  });
 
-  // Update the learners array
-  learners = learners.map(learner => {
+   
 
-    // Replace each mentor ID with the mentor's name
-    let mentorNames = learner.mentors.map(id => mentorLookup[id]);
+      // 👆 ==================== TASK 2 END ====================== 👆
 
-    // Return a new object with the updated mentors array
-    return { ...learner, mentors: mentorNames };
-  });
-
-  console.log(learners);
-
-  // 👆 ==================== TASK 2 END ====================== 👆
-
-  const cardsContainer = document.querySelector('.cards')
-  const info = document.querySelector('.info')
-  info.textContent = 'No learner is selected'
+      const cardsContainer = document.querySelector('.cards')
+      const info = document.querySelector('.info')
+      info.textContent = 'No learner is selected'
 
 
   // 👇 ==================== TASK 3 START ==================== 👇
@@ -280,62 +116,74 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
     const mentorsHeading = document.createElement('h4')
     const mentorsList = document.createElement('ul')
 
-      // Assuming learner object is something like this
-// let learner = { name: 'John Doe', email: 'john.doe@example.com', mentors: ['Mentor1', 'Mentor2'] };
 
-      
-      
-      card.classList.add('card');
+   //add classlists to elements created
+  card.classList.add('card');
 
-      
-      heading.classList.add('card-heading');
+  //heading.classList.add('card-heading');
 
-      
-      email.classList.add('card-email');
+ 
+  email.classList.add('card-email');
 
-      
-      mentorsHeading.classList.add('mentors-heading', ('closed'), ('open'));
+  
+  mentorsHeading.classList.add('mentors-heading', 'closed');
 
-      
-      mentorsList.classList.add('mentors-list');
-      
+  
+  mentorsList.classList.add('mentors-list');
+  //mentorsList.style.display = 'block'
 
-      heading.textContent = learner.name;
-      email.textContent = learner.email;
-      mentorsHeading.textContent = 'Mentors';
+    
 
-          
-      // Loop over the mentors and create an <li> element for each
-      learner.mentors.forEach(mentor => {
-        const mentorItem = document.createElement('li');
-        mentorItem.textContent = mentor;
-        mentorsList.appendChild(mentorItem);
-      });
+  heading.textContent = learner.fullName;
+  email.textContent = learner.email;
+  mentorsHeading.textContent = 'mentors';
 
-      card.appendChild(heading);
-      card.appendChild(email);
-      card.appendChild(mentorsHeading);
-      card.appendChild(mentorsList);
+ // Loop over the mentors and create an <li> element for each
+  learner.mentors.forEach(mentorId => {
 
-      // Assuming cardsContainer is a defined element
-      cardsContainer.appendChild(card);
-      
+    //find method looks for the mentor object in mentor array that has matching id
+  const mentor = mentors.find(m => m.id === mentorId);
+
+  if (mentor) {
+
+    // create a full <li> element with the mentor's full name
+    const mentorItem = document.createElement('li');
+    mentorItem.textContent = `${mentor.firstName} ${mentor.lastName}`;
+
+    mentorsList.appendChild(mentorItem);
+
+  }
+});
+
+  card.appendChild(heading);
+  card.appendChild(email);
+  card.appendChild(mentorsHeading);
+  card.appendChild(mentorsList);
+
+  // append card to cardsContainer
+  cardsContainer.appendChild(card);
 
 
+    
 
     // 👆 ==================== TASK 3 END ====================== 👆
 
     // 👆 WORK ONLY ABOVE THIS LINE 👆
     // 👆 WORK ONLY ABOVE THIS LINE 👆
     // 👆 WORK ONLY ABOVE THIS LINE 👆
+
     card.appendChild(mentorsList)
-    card.dataset.fullName = learner.fullName
+   // card.dataset.fullName = learner.fullName
     cardsContainer.appendChild(card)
 
     card.addEventListener('click', evt => {
+      console.log('card clicked')
       const mentorsHeading = card.querySelector('h4')
       // critical booleans
       const didClickTheMentors = evt.target === mentorsHeading
+        
+      console.log("Did click mentors: ", didClickTheMentors);
+
       const isCardSelected = card.classList.contains('selected')
       // do a reset of all learner names, selected statuses, info message
       document.querySelectorAll('.card').forEach(crd => {
@@ -348,8 +196,8 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
         // easy case, no mentor involvement
         if (!isCardSelected) {
           // selecting the card:
-          card.classList.add('selected')
-          heading.textContent += `, ID ${learner.id}`
+          card.classList.add('selected');
+          heading.textContent = `${learner.fullName}, ID ${learner.id}`
           info.textContent = `The selected learner is ${learner.fullName}`
         }
       } else {
@@ -362,18 +210,19 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
         }
         if (!isCardSelected) {
           // if card was not selected adjust texts
-          heading.textContent += `, ID ${learner.id}`
+          heading.textContent =  `${learner.fullName}, ID ${learner.id}`
           info.textContent = `The selected learner is ${learner.fullName}`
         }
       }
     })
-  }
+ 
 
   const footer = document.querySelector('footer')
   const currentYear = new Date().getFullYear()
   footer.textContent = `© BLOOM INSTITUTE OF TECHNOLOGY ${currentYear}`
 }
 
+}
 // ❗ DO NOT CHANGE THIS CODE. WORK ONLY INSIDE TASKS 1, 2, 3
 if (typeof module !== 'undefined' && module.exports) module.exports = { sprintChallenge5 }
 else sprintChallenge5()

@@ -128,7 +128,7 @@ async function sprintChallenge5() { // Note the async keyword so you can use `aw
   email.classList.add('card-email');
 
   
-  mentorsHeading.classList.add('mentors-heading', 'closed');
+  mentorsHeading.classList.add('closed');
 
   
   mentorsList.classList.add('mentors-list');
